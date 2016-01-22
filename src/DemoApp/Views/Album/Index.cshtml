@@ -1,0 +1,48 @@
+﻿
+@model DemoApp.Models.AlbumModel
+@{
+    ViewBag.Title = "Album";
+}
+
+<h2>@Model.Title</h2>
+
+<div style="float:right"><a asp-controller="Cart" asp-action="Index">View Cart</a>
+</div>
+<div>
+    @String.Format("Artist - {0}", @Model.Artist)
+</div>
+<div>
+    @String.Format("Price - {0}", @Model.Price.ToString("c"))
+</div>
+<div>
+    Quantity - <select asp-for="Quantity" asp-items="ViewBag.QuantitySelectList"></select>
+    <a id="AddToCart" href="#">Add To Cart</a>
+</div>
+<input type="hidden" id="Id" value="@Model.Id" />
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#AddToCart").click(function () {
+                addToCart();
+            });
+        });
+
+        function addToCart() {
+            $.ajax({
+                url: "/Cart/AddToCart",
+                datatype: "json",
+                data: { Id: $("#Id").val(), quantity: $("#Quantity").val() },
+                async: false,
+                success: function () {
+                }
+            });
+        }
+
+    </script>
+}
+
+
+
+
+

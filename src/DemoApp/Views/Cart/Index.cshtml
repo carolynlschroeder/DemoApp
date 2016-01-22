@@ -1,0 +1,31 @@
+﻿@model List<DemoApp.Models.CartItemModel>
+@{
+    ViewBag.Title = "View Cart";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model != null)
+{
+    <table class="table">
+        <tr>
+            <th>AlbumId</th>
+            <th>Quantity</th>
+        </tr>
+        @foreach (var cartItem in Model)
+        {
+            <tr>
+                <td>
+                    @cartItem.AlbumId
+                </td>
+                <td>@cartItem.Quantity</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>
+        No items in your cart
+    </p>
+}
