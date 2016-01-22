@@ -52,6 +52,8 @@ namespace DemoApp
             services.AddSession();
             services.AddMvc();
 
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
